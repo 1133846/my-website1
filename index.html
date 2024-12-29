@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>程式設計期末個人網頁</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>卓秧伶的回憶錄個人主頁</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #F8D9E1, #FDE0E9); 
+      color: #333;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background-color: #F2A1B2; 
+      padding: 20px;
+      color: white;
+    }
+
+    .container {
+      padding: 30px;
+    }
+
+    #gg {
+      font-size: 2em; 
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 1.5em;
+      background-color: #F2A1B2;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+      margin-bottom: 15px;
+    }
+
+    button:hover {
+      background-color: #e08d99;
+    }
+
+    .menu {
+      background-color: #F2A1B2;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .menu button {
+      background-color: #ffffff;
+      color: #F2A1B2;
+      padding: 10px 20px;
+      font-size: 1.1em;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+
+    .menu button:hover {
+      background-color: #F2A1B2;
+      color: white;
+    }
+
+    .profile-info, .memories {
+      background-color: #ffffff;
+      padding: 15px;
+      margin: 20px auto;
+      border-radius: 8px;
+      max-width: 800px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .memories p {
+      font-size: 1.2em;
+      line-height: 1.6;
+    }
+
+    .photo {
+      width: 100%;
+      max-width: 400px;
+      margin: 20px auto; 
+      border-radius: 8px;
+      border: 5px solid #F2A1B2;
+      padding: 10px;
+      box-sizing: border-box;
+      display: none;
+    }
+
+    .photo:first-child {
+      display: block;
+    }
+
+    .photo:hover {
+      transform: scale(1.05);
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>歡迎來到卓秧伶的高中回憶錄</h1>
+  </header>
+
+  <div class="container">
+    <div class="menu">
+      <button onclick="scrollToSection('about')">關於我</button>
+      <button onclick="scrollToSection('photos')">生活照</button>
+      <button onclick="scrollToSection('skills')">我的技能</button>
+      <button onclick="scrollToSection('memories')">我的回憶</button>
+    </div>
+
+    <h2>今天的日期和時間是：</h2>
+    <p id="current-date-time"></p>
+
+    <div id="about" class="profile-info">
+      <h2>關於我的高中生活</h2>
+      <p>回顧我在文山高中的精彩時光。</p>
+    </div>
+
+    <div id="photos" class="profile-info">
+      <h2>生活照：</h2>
+      <div id="photo-container" style="display: flex; justify-content: center;">
+        <img src="https://i.ibb.co/ZNm18HV/2024-12-27-032949.png" alt="生活照1" class="photo">
+        <img src="https://i.ibb.co/KKrPSh2/2024-12-27-022238.png" alt="生活照2" class="photo">
+        <img src="https://i.ibb.co/YWzV5T5/2024-12-27-231213.png" alt="生活照3" class="photo">
+      </div>
+    </div>
+
+    <div id="skills" class="profile-info">
+      <h2>我在高中所學到的技能及培養的興趣</h2>
+      <ul>
+        <li>我參加過熱音社並擔任鼓手</li>
+        <li>我參加了烹飪社培養了對烹飪的興趣</li>
+        <li>我結交了許多交心的朋友</li>
+        <li>我喜歡到處品嘗美食</li>
+      </ul>
+    </div>
+
+    <div id="memories" class="memories">
+      <h2>高中令我印象最深刻的事情</h2>
+      <p>猜猜看是哪一個!</p>
+      <div class="options">
+        <button id="option1" onclick="selectOption('畢業旅行')"> 畢業旅行</button>
+        <button id="option2" onclick="selectOption('拍畢業照')"> 拍畢業照</button>
+        <button id="option3" onclick="selectOption('畢業典禮')"> 畢業典禮</button>
+        <button id="option4" onclick="selectOption('一年一度的校慶')"> 校慶活動</button>
+      </div>
+
+      <p id="result"></p>
+    </div>
+
+    <p id="gg">已結束卓秧伶的高中回憶錄旅程</p>
+    <button onclick="ncyu()">按下此鍵</button>
+  </div>
+
+  <script>
+    window.onload = function() {
+      alert("歡迎來到卓秧伶的回憶錄個人主頁!");
+
+      const today = new Date();
+      const dateString = today.toLocaleDateString('zh-TW');
+      const timeString = today.toLocaleTimeString('zh-TW');
+      const dateTimeString = dateString + " " + timeString;
+      document.getElementById("current-date-time").textContent = dateTimeString;
+    };
+
+    function scrollToSection(id) {
+      const section = document.getElementById(id);
+      window.scrollTo({
+        top: section.offsetTop - 20,
+        behavior: 'smooth'
+      });
+    }
+
+    function selectOption(selectedOption) {
+      if (selectedOption === "畢業旅行") {
+        alert("猜對了~");
+      } else {
+        alert("才不是!");
+      }
+    }
+
+    function ncyu() {
+      let a1 = document.getElementById("gg");
+      a1.innerHTML = "感謝瀏覽~";
+    }
+
+    let photoIndex = 0;
+    let photos = document.querySelectorAll('.photo');
+    
+    function changePhoto() {
+      photos.forEach((photo, index) => {
+        photo.style.display = 'none';
+      });
+      photoIndex = (photoIndex + 1) % photos.length;
+      photos[photoIndex].style.display = 'block';
+    }
+    
+    setInterval(changePhoto, 3000);
+    changePhoto(); 
+  </script>
+
+</body>
+</html>
+<!-- partial -->
+  
+</body>
+</html>
